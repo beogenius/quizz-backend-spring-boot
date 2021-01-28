@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,13 @@ public class User {
 
     private String email;
 
-    private int role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name="user_id")},
+            inverseJoinColumns = {@JoinColumn(name="role_id")}
+    )
+    private Set<Role> roles;
 
     private String image;
 
@@ -42,14 +49,17 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String password, int age, String address, String email, int role, String image, LocalDate createAt, LocalDate dob, AppGroup appGroup, int appGroup_id) {
+    public User(int id, String username, String password, int age,
+                String address, String email, Set<Role> roles, String image,
+                LocalDate createAt, LocalDate dob, AppGroup appGroup, int appGroup_id) {
+
         this.id = id;
         this.username = username;
         this.password = password;
         this.age = age;
         this.address = address;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
         this.image = image;
         this.createAt = createAt;
         this.dob = dob;
@@ -105,12 +115,12 @@ public class User {
         this.email = email;
     }
 
-    public int getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getImage() {
