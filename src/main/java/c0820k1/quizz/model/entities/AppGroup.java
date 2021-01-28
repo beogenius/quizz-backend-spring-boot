@@ -1,6 +1,8 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppGroup {
 
     @Id
@@ -17,10 +19,11 @@ public class AppGroup {
     private String groupName;
     private String description;
 
-
+    @JsonBackReference
     @OneToMany(mappedBy = "appGroup")
     private List<User> userList;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "app_group_exam",
@@ -33,11 +36,12 @@ public class AppGroup {
 
     }
 
-    public AppGroup(int id, String groupName, String description, List<User> userList) {
+    public AppGroup(int id, String groupName, String description, List<User> userList, List<Exam> examList) {
         this.id = id;
         this.groupName = groupName;
         this.description = description;
         this.userList = userList;
+        this.examList = examList;
     }
 
     public int getId() {
@@ -70,5 +74,13 @@ public class AppGroup {
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+    }
+
+    public List<Exam> getExamList() {
+        return examList;
+    }
+
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
     }
 }

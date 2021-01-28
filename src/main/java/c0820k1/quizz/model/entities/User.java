@@ -1,6 +1,7 @@
 package c0820k1.quizz.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class User {
     private String address;
 
     private String email;
-
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

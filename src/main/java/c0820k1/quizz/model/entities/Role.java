@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

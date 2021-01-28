@@ -1,5 +1,6 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -8,17 +9,18 @@ import java.util.List;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String examName;
 
-
+    @JsonBackReference
     @ManyToMany(mappedBy = "examList")
     private List<Question> questionList;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "examList")
     private List<AppGroup> appGroupList;
 
