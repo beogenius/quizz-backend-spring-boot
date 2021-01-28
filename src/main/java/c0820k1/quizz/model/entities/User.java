@@ -1,5 +1,6 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,6 +41,10 @@ public class User {
     private LocalDate createAt;
 
     private LocalDate dob;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<HistoryAssignment> historyAssignmentList;
 
     @ManyToOne
     @JoinColumn( name="app_group_id", insertable = false, updatable = false)

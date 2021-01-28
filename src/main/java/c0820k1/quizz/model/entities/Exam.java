@@ -2,6 +2,7 @@ package c0820k1.quizz.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class Exam {
     @JsonBackReference
     @ManyToMany(mappedBy = "examList")
     private List<AppGroup> appGroupList;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "exam")
+    private List<HistoryAssignment> historyAssignmentList;
 
     public Exam() {
     }
