@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,8 +29,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = {@JoinColumn(name="user_id")},
-            inverseJoinColumns = {@JoinColumn(name="role_id")}
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> roles;
 
@@ -39,8 +40,16 @@ public class User {
 
     private LocalDate dob;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
+    )
+    private List<Exam> exams;
+
     @ManyToOne
-    @JoinColumn( name="app_group_id", insertable = false, updatable = false)
+    @JoinColumn(name = "app_group_id", insertable = false, updatable = false)
     private AppGroup appGroup;
 
 
@@ -50,10 +59,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String password, int age,
-                String address, String email, Set<Role> roles, String image,
-                LocalDate createAt, LocalDate dob, AppGroup appGroup, int appGroup_id) {
-
+    public User(int id, String username, String password, int age, String address, String email, Set<Role> roles, String image, LocalDate createAt, LocalDate dob, List<Exam> exams, AppGroup appGroup, int appGroup_id) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -64,6 +70,7 @@ public class User {
         this.image = image;
         this.createAt = createAt;
         this.dob = dob;
+        this.exams = exams;
         this.appGroup = appGroup;
         this.appGroup_id = appGroup_id;
     }
@@ -162,5 +169,13 @@ public class User {
 
     public void setAppGroup_id(int appGroup_id) {
         this.appGroup_id = appGroup_id;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 }

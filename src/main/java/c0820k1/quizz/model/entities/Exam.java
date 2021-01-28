@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,14 @@ public class Exam {
     private int id;
     private String examName;
 
+    @ManyToMany
+    private List<User> users;
+
+    private double soccer;
+
+    private Timestamp startTime;
+
+    private Timestamp endTime;
 
     @ManyToMany(mappedBy = "examList")
     private List<Question> questionList;
@@ -25,9 +34,13 @@ public class Exam {
     public Exam() {
     }
 
-    public Exam(int id, String examName, List<Question> questionList, List<AppGroup> appGroupList) {
+    public Exam(int id, String examName, List<User> users, double soccer, Timestamp startTime, Timestamp endTime, List<Question> questionList, List<AppGroup> appGroupList) {
         this.id = id;
         this.examName = examName;
+        this.users = users;
+        this.soccer = soccer;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.questionList = questionList;
         this.appGroupList = appGroupList;
     }
@@ -62,5 +75,37 @@ public class Exam {
 
     public void setAppGroupList(List<AppGroup> appGroupList) {
         this.appGroupList = appGroupList;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public double getSoccer() {
+        return soccer;
+    }
+
+    public void setSoccer(double soccer) {
+        this.soccer = soccer;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
 }
