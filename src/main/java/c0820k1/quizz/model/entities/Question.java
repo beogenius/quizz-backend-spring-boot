@@ -33,6 +33,63 @@ public class Question {
     )
     private List<Exam> examList;
 
+    public Question(int id, String content, List<Answer> answerList, Category category, int category_id, List<Exam> examList) {
+        this.id = id;
+        this.content = content;
+        this.answerList = answerList;
+        this.category = category;
+        this.category_id = category_id;
+        this.examList = examList;
+    }
 
+    public Question() {
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<Answer> getAnswerList() {
+        return answerList;
+    }
+
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public List<Exam> getExamList() {
+        return examList;
+    }
+
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
+    }
 }
