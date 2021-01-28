@@ -1,8 +1,6 @@
 package c0820k1.quizz.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -18,7 +16,6 @@ public class Question {
 
     private String content;
 
-    @JsonIgnoreProperties("answerList")
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
@@ -29,7 +26,6 @@ public class Question {
     @Transient
     private int category_id;
 
-    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "exam_question",
             joinColumns = @JoinColumn(name = "question_id"),
