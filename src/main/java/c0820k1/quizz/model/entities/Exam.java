@@ -1,28 +1,35 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String examName;
-    private String examCode;
+
 
     @ManyToMany(mappedBy = "examList")
     private List<Question> questionList;
 
+    @ManyToMany(mappedBy = "examList")
+    private List<AppGroup> appGroupList;
+
     public Exam() {
     }
 
-    public Exam(int id, String examName, String examCode, List<Question> questionList) {
+    public Exam(int id, String examName, List<Question> questionList, List<AppGroup> appGroupList) {
         this.id = id;
         this.examName = examName;
-        this.examCode = examCode;
         this.questionList = questionList;
+        this.appGroupList = appGroupList;
     }
 
     public int getId() {
@@ -41,19 +48,19 @@ public class Exam {
         this.examName = examName;
     }
 
-    public String getExamCode() {
-        return examCode;
-    }
-
-    public void setExamCode(String examCode) {
-        this.examCode = examCode;
-    }
-
     public List<Question> getQuestionList() {
         return questionList;
     }
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
+    }
+
+    public List<AppGroup> getAppGroupList() {
+        return appGroupList;
+    }
+
+    public void setAppGroupList(List<AppGroup> appGroupList) {
+        this.appGroupList = appGroupList;
     }
 }
