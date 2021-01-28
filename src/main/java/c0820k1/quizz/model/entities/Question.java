@@ -18,7 +18,7 @@ public class Question {
 
     private String content;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 

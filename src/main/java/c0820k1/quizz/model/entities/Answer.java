@@ -1,5 +1,6 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -14,7 +15,7 @@ public class Answer {
     private int id;
     private String answerName;
     private boolean isCorrect;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="question_id")
     private Question question;
