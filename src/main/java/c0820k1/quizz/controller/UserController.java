@@ -16,12 +16,12 @@ public class UserController {
     Response res = new Response();
 
     @GetMapping()
-    public List<User> getAll(){
+    public Response getAll(){
         List<User> userList = userService.getAll();
         res.data = userList;
         res.status = res.SUCCESS;
         res.message = "Success";
-        return userList;
+        return res;
     }
 
     @GetMapping("user")
