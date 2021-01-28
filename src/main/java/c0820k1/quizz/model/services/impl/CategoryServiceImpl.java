@@ -4,9 +4,11 @@ import c0820k1.quizz.model.entities.Category;
 import c0820k1.quizz.model.repositories.CategoryRepository;
 import c0820k1.quizz.model.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;

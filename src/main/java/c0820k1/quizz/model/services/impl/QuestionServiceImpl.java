@@ -4,9 +4,11 @@ import c0820k1.quizz.model.entities.Question;
 import c0820k1.quizz.model.repositories.QuestionRepository;
 import c0820k1.quizz.model.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;

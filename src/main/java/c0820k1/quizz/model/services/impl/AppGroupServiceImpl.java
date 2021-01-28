@@ -4,9 +4,11 @@ import c0820k1.quizz.model.entities.AppGroup;
 import c0820k1.quizz.model.repositories.AppGroupRepository;
 import c0820k1.quizz.model.services.AppGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AppGroupServiceImpl implements AppGroupService {
     @Autowired
     private AppGroupRepository appGroupRepository;

@@ -4,9 +4,11 @@ import c0820k1.quizz.model.entities.Exam;
 import c0820k1.quizz.model.repositories.ExamRepository;
 import c0820k1.quizz.model.services.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ExamServiceImpl implements ExamService {
     @Autowired
     private ExamRepository examRepository;

@@ -4,9 +4,11 @@ import c0820k1.quizz.model.entities.Role;
 import c0820k1.quizz.model.repositories.RoleRepository;
 import c0820k1.quizz.model.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
