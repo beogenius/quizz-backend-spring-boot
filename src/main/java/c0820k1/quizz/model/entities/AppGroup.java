@@ -1,10 +1,14 @@
 package c0820k1.quizz.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppGroup {
 
     @Id
@@ -16,6 +20,14 @@ public class AppGroup {
 
     @OneToMany(mappedBy = "appGroup")
     private List<User> userList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "app_group_exam",
+            joinColumns = {@JoinColumn(name="app_group_id")},
+            inverseJoinColumns = {@JoinColumn(name="exam_id")}
+    )
+    private List<Exam> examList;
 
     public AppGroup() {
 
