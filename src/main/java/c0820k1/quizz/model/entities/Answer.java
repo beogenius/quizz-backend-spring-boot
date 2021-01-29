@@ -8,16 +8,16 @@ import javax.persistence.*;
 
 @Entity
 @Table
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String answerName;
     private boolean isCorrect;
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="question_id")
+    @JoinColumn(name="question_id", updatable = false, insertable = false)
     private Question question;
 
     @Transient

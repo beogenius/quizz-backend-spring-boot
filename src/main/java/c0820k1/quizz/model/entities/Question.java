@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Question {
 
     private String content;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
