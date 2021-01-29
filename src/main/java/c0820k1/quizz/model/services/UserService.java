@@ -10,4 +10,5 @@ public interface UserService extends CommonService<User>{
     User findById(int id);
     User save(User user);
     User delete(int id);
+
 }

@@ -42,7 +42,7 @@ public class User {
 
     private LocalDate dob;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "user")
     private List<HistoryAssignment> historyAssignmentList;
 
@@ -169,5 +169,13 @@ public class User {
 
     public void setAppGroup_id(int appGroup_id) {
         this.appGroup_id = appGroup_id;
+    }
+
+    public List<HistoryAssignment> getHistoryAssignmentList() {
+        return historyAssignmentList;
+    }
+
+    public void setHistoryAssignmentList(List<HistoryAssignment> historyAssignmentList) {
+        this.historyAssignmentList = historyAssignmentList;
     }
 }

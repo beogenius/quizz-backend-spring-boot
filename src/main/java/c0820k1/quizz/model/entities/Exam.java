@@ -1,9 +1,7 @@
 package c0820k1.quizz.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,18 +23,19 @@ public class Exam {
     @ManyToMany(mappedBy = "examList")
     private List<AppGroup> appGroupList;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "exam")
     private List<HistoryAssignment> historyAssignmentList;
 
     public Exam() {
     }
 
-    public Exam(int id, String examName, List<Question> questionList, List<AppGroup> appGroupList) {
+    public Exam(int id, String examName, List<Question> questionList, List<AppGroup> appGroupList, List<HistoryAssignment> historyAssignmentList) {
         this.id = id;
         this.examName = examName;
         this.questionList = questionList;
         this.appGroupList = appGroupList;
+        this.historyAssignmentList = historyAssignmentList;
     }
 
     public int getId() {
@@ -69,5 +68,13 @@ public class Exam {
 
     public void setAppGroupList(List<AppGroup> appGroupList) {
         this.appGroupList = appGroupList;
+    }
+
+    public List<HistoryAssignment> getHistoryAssignmentList() {
+        return historyAssignmentList;
+    }
+
+    public void setHistoryAssignmentList(List<HistoryAssignment> historyAssignmentList) {
+        this.historyAssignmentList = historyAssignmentList;
     }
 }
