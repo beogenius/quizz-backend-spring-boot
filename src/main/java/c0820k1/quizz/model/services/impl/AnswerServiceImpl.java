@@ -34,4 +34,9 @@ public class AnswerServiceImpl implements AnswerService {
     public Answer save(Answer answer) {
         return answerRepository.save(answer);
     }
+
+    @Override
+    public List<Answer> saveAll(List<Answer> answerList) {
+        return answerRepository.saveAll(answerList);
+    }
 }

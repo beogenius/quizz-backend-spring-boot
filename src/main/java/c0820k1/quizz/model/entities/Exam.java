@@ -1,80 +1,50 @@
 package c0820k1.quizz.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String examName;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "examList")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "exam_question",
+            joinColumns = { @JoinColumn(name = "exam_id") },
+            inverseJoinColumns = { @JoinColumn(name = "question_id") })
     private List<Question> questionList;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "examList")
+    @Transient
+    private int[] questionIdList;
+
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },mappedBy = "examList")
     private List<AppGroup> appGroupList;
 
-    @JsonBackReference
+    @Transient
+    private int[] appGroupIdList;
+
     @OneToMany(mappedBy = "exam")
     private List<HistoryAssignment> historyAssignmentList;
-
-    public Exam() {
-    }
-
-    public Exam(int id, String examName, List<Question> questionList, List<AppGroup> appGroupList, List<HistoryAssignment> historyAssignmentList) {
-        this.id = id;
-        this.examName = examName;
-        this.questionList = questionList;
-        this.appGroupList = appGroupList;
-        this.historyAssignmentList = historyAssignmentList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getExamName() {
-        return examName;
-    }
-
-    public void setExamName(String examName) {
-        this.examName = examName;
-    }
-
-    public List<Question> getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
-    public List<AppGroup> getAppGroupList() {
-        return appGroupList;
-    }
-
-    public void setAppGroupList(List<AppGroup> appGroupList) {
-        this.appGroupList = appGroupList;
-    }
-
-    public List<HistoryAssignment> getHistoryAssignmentList() {
-        return historyAssignmentList;
-    }
-
-    public void setHistoryAssignmentList(List<HistoryAssignment> historyAssignmentList) {
-        this.historyAssignmentList = historyAssignmentList;
-    }
 }
