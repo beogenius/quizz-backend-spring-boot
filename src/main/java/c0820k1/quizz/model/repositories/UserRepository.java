@@ -9,6 +9,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     //Hieu
     Optional<User> findByUsername(String username);
-
     boolean existsByUsername(String username);
 }

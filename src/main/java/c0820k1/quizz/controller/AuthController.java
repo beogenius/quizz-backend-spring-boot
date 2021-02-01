@@ -16,6 +16,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,6 +50,9 @@ public class AuthController {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(user.getPassword());
+        newUser.setEmail(user.getEmail());
+        newUser.setAddress(user.getAddress());
+        newUser.setImage(user.getImage());
         Set<Role> roles = new HashSet<>();
         user.getRoles().forEach(role -> {
             if (role.getName().equals("admin")) {
@@ -57,6 +64,14 @@ public class AuthController {
             }
         });
         newUser.setRoles(roles);
+        Date date = new Date();
+        Timestamp createdAt = new Timestamp(date.getTime());
+        newUser.setCreateAt(createdAt);
+        newUser.setDob(user.getDob());
+        LocalDate today = createdAt.toLocalDateTime().toLocalDate();
+        LocalDate dob = user.getDob().toLocalDateTime().toLocalDate();
+        int age = Math.abs(Period.between(today, dob).getYears());
+        newUser.setAge(age);
         userService.save(newUser);
         return new ResponseEntity(HttpStatus.OK);
     }

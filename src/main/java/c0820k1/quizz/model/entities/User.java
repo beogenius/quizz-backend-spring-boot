@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
@@ -35,9 +36,9 @@ public class User {
 
     private String image;
 
-    private LocalDate createAt;
+    private Timestamp createAt;
 
-    private LocalDate dob;
+    private Timestamp dob;
 
     @ManyToOne
     @JoinColumn( name="app_group_id", insertable = false, updatable = false)
@@ -52,7 +53,7 @@ public class User {
 
     public User(int id, String username, String password, int age,
                 String address, String email, Set<Role> roles, String image,
-                LocalDate createAt, LocalDate dob, AppGroup appGroup, int appGroup_id) {
+                Timestamp createAt, Timestamp dob, AppGroup appGroup, int appGroup_id) {
 
         this.id = id;
         this.username = username;
@@ -132,19 +133,19 @@ public class User {
         this.image = image;
     }
 
-    public LocalDate getCreateAt() {
+    public Timestamp getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
 
-    public LocalDate getDob() {
+    public Timestamp getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(Timestamp dob) {
         this.dob = dob;
     }
 
